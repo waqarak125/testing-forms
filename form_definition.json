@@ -1,5 +1,7 @@
 [
-  { "label": "Full Name", "type": "text", "name": "name" },
-  { "label": "Email Address", "type": "email", "name": "email" },
-  { "label": "Cover Letter", "type": "textarea", "name": "message" }
+  {
+    "label": "abc",
+    "type": "text",
+    "name": "aa"
+  }
 ]
