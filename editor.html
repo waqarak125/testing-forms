@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Editor</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, select { margin-bottom: 10px; display: block; }
+  </style>
+</head>
+<body>
+  <h1>Form Editor</h1>
+  <div id="form-builder">
+    <label>Field Label: <input type="text" id="label" /></label>
+    <label>Field Name: <input type="text" id="name" /></label>
+    <label>Type:
+      <select id="type">
+        <option value="text">Text</option>
+        <option value="email">Email</option>
+        <option value="textarea">Textarea</option>
+      </select>
+    </label>
+    <button onclick="addField()">Add Field</button>
+    <pre id="jsonOutput"></pre>
+  </div>
+
+  <script>
+    const fields = [];
+
+    function addField() {
+      const label = document.getElementById('label').value;
+      const name = document.getElementById('name').value;
+      const type = document.getElementById('type').value;
+
+      if (!label || !name) {
+        alert("Label and Name are required.");
+        return;
+      }
+
+      fields.push({ label, type, name });
+      document.getElementById('jsonOutput').textContent = JSON.stringify(fields, null, 2);
+    }
+  </script>
+</body>
+</html>
