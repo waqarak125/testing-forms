@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Application Form</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    label { display: block; margin-bottom: 10px; }
+    input, textarea { width: 300px; display: block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Job Application</h1>
+  <form id="form" onsubmit="handleSubmit(event)"></form>
+
+  <script>
+    fetch('form-definition.json')
+      .then(res => res.json())
+      .then(fields => {
+        const form = document.getElementById('form');
+        fields.forEach(field => {
+          const label = document.createElement('label');
+          label.textContent = field.label;
+
+          let input;
+          if (field.type === 'textarea') {
+            input = document.createElement('textarea');
+          } else {
+            input = document.createElement('input');
+            input.type = field.type;
+          }
+
+          input.name = field.name;
+          label.appendChild(input);
+          form.appendChild(label);
+        });
+
+        const submit = document.createElement('button');
+        submit.type = 'submit';
+        submit.textContent = 'Submit';
+        form.appendChild(submit);
+      });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const result = {};
+      for (let [key, value] of data.entries()) {
+        result[key] = value;
+      }
+      alert('Form submitted:\n' + JSON.stringify(result, null, 2));
+    }
+  </script>
+</body>
+</html>
